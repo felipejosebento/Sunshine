@@ -52,17 +52,19 @@ public class MainActivityFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        //super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.forecastfragment, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_refresh)
+        if(id == R.id.action_refresh){
+            FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+            fetchWeatherTask.execute();
             return true;
+        }
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
@@ -81,8 +83,6 @@ public class MainActivityFragment extends Fragment {
 
         listView = (ListView) rootView.findViewById(R.id.listview_forecast);
         listView.setAdapter(mForestAdapter);
-
-
         return rootView;
     }
     public class FetchWeatherTask extends AsyncTask{
